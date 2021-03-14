@@ -20,8 +20,10 @@ import {
   ModalContext,
 } from '@8base/boost';
 import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
+import { Loader } from '@8base/boost';
+import { removeTypename } from '../../helpers'
 
-const CLIENT_QUERY = gql`
+/* const CLIENT_QUERY = gql`
   query ClientsEntity($id: ID!) {
   client(id: $id) {
     id
@@ -37,6 +39,19 @@ const CLIENT_QUERY = gql`
       }
       count
     }
+  }
+} 
+`; */
+
+const CLIENT_QUERY = gql`
+  query ClientsEntity($id: ID!) {
+  client(id: $id) {
+    id
+    firstName
+    lastName
+    email
+    phone
+    birthday
   }
 } 
 `;
@@ -67,7 +82,7 @@ const ClientEditDialog = ehnhancer(
     static contextType = ModalContext;
 
     updateOnSubmit = id => async data => {
-      await this.props.clientUpdate({ variables: { data: { ...data, id } } });
+      await this.props.clientUpdate({ variables: { data: { ...removeTypename(data), id } } });
 
       this.context.closeModal('CLIENT_EDIT_DIALOG_ID');
     };
@@ -79,7 +94,9 @@ const ClientEditDialog = ehnhancer(
     renderForm = ({ args }) => {
       return (
         <Query query={CLIENT_QUERY} variables={{ id: args.id }}>
-          {({ data, loading }) => (
+          {({ data, loading }) => {
+            if (loading) return <Loader stretch />;
+            return (
             <FormLogic
               type="UPDATE"
               tableSchemaName="Clients"
@@ -128,7 +145,7 @@ const ClientEditDialog = ehnhancer(
                 </form>
               )}
             </FormLogic>
-          )}
+          )}}
         </Query>
       );
     };
