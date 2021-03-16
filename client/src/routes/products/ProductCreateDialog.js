@@ -46,6 +46,17 @@ const ProductCreateDialog = enhancer(
     static contextType = ModalContext;
 
     onSubmit = async data => {
+      data = {
+        ...data, 
+        picture: {
+          create: {
+            fileId: data.picture.fileId,
+            filename: data.picture.filename,
+            public: data.picture.public,
+          }
+        }
+      };
+
       await this.props.productCreate({ variables: { data } });
 
       this.context.closeModal('PRODUCT_CREATE_DIALOG_ID');
@@ -61,7 +72,7 @@ const ProductCreateDialog = enhancer(
         <Dialog.Body scrollable>
           <Grid.Layout gap="md" stretch>
             <Grid.Box>
-              <Field name="picture" label="Picture" component={FileInputField} />
+              <Field name="picture" label="Picture" component={FileInputField} maxFiles={1} public={true} />
             </Grid.Box>
             <Grid.Box>
               <Field name="name" label="Name" component={InputField} />

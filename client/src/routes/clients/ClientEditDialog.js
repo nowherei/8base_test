@@ -21,7 +21,7 @@ import {
 } from '@8base/boost';
 import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
 import { Loader } from '@8base/boost';
-import { removeTypename } from '../../helpers'
+import { removeTypename } from '../../helpers';
 
 /* const CLIENT_QUERY = gql`
   query ClientsEntity($id: ID!) {
