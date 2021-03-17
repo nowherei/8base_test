@@ -9,7 +9,7 @@ import { OrdersTable } from './OrdersTable';
 const Orders = () => (
   <Card padding="md" stretch>
     <Card.Header>
-      <Heading type="h4" text=" Orders" />
+      <Heading type="h2" text=" Orders" />
     </Card.Header>
 
     <OrderCreateDialog />

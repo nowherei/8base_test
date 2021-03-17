@@ -6,6 +6,8 @@ import { flowRight as compose } from 'lodash';
 import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
+import { withRouter } from 'react-router-dom';
+import ClientDetailsOrderList from './client-details/ClientDetailsOrderList';
 
 const CLIENTS_LIST_QUERY = gql`
 query ClientsTableContent($filter: ClientFilter, $orderBy: [ClientOrderBy], $after: String, $before: String, $first: Int, $last: Int, $skip: Int) {
@@ -89,9 +91,11 @@ const TABLE_COLUMNS = [
 
 const enhancer = compose(withModal, graphql(CLIENTS_LIST_QUERY, { name: 'clients' }));
 
-const ClientsTable = enhancer(
+const ClientsTable = enhancer(withRouter(
   class ClientsTable extends React.PureComponent {
-    renderEdit = rowData => (
+    renderEdit = rowData => {
+      const {history} = this.props;
+    return (
       <Dropdown defaultOpen={false}>
         <Dropdown.Head>
           <Icon name="More" size="sm" color="LIGHT_GRAY2" />
@@ -99,6 +103,13 @@ const ClientsTable = enhancer(
         <Dropdown.Body pin="right">
           {({ closeDropdown }) => (
             <Menu>
+              <Menu.Item
+                onClick={() => {
+                  history.push(rowData.id);
+                }}
+              >
+                Open
+              </Menu.Item>
               <Menu.Item
                 onClick={() => {
                   this.props.openModal('CLIENT_EDIT_DIALOG_ID', { id: rowData.id });
@@ -119,7 +130,7 @@ const ClientsTable = enhancer(
           )}
         </Dropdown.Body>
       </Dropdown>
-    );
+    )};
 
     renderItems = (column, rowData, handler) => {
       const dataPath = column.name.split('.');
@@ -202,6 +213,6 @@ const ClientsTable = enhancer(
       );
     }
   }
-);
+));
 
 export { ClientsTable };

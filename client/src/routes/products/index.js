@@ -9,7 +9,7 @@ import { ProductsTable } from './ProductsTable';
 const Products = () => (
   <Card padding="md" stretch>
     <Card.Header>
-      <Heading type="h4" text=" Products" />
+      <Heading type="h2" text=" Products" />
     </Card.Header>
 
     <ProductCreateDialog />
