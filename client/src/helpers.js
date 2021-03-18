@@ -14,3 +14,11 @@ export const removeTypename = (value) => {
   }
   return value;
 };
+
+export const getTotalOrder = (items) => {
+  return items.reduce((acc, current) => {
+    const {product:{price}, quantity } = current;
+    const cost = Math.round(+price * quantity * 100) / 100;
+    return Math.round((acc + cost) * 100) / 100;
+  }, 0)
+}

@@ -7,6 +7,7 @@ import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
 import { withRouter } from 'react-router-dom';
+import { getTotalOrder } from '../../helpers';
 
 const ORDERS_LIST_QUERY = gql`
   query OrdersTableContent(
@@ -38,6 +39,16 @@ const ORDERS_LIST_QUERY = gql`
         comment
         status
         _description
+        orderItems {
+          count
+          items {
+            id
+            product {
+              price
+            }
+            quantity
+          }
+        }
       }
       count
     }
@@ -97,6 +108,17 @@ const TABLE_COLUMNS = [
       fieldType: FIELD_TYPE.SWITCH,
       fieldTypeAttributes: {
         format: 'CUSTOM',
+      },
+    },
+  },
+  {
+    name: 'orderItems',
+    title: 'Total',
+    meta: {
+      isList: false,
+      fieldType: FIELD_TYPE.NUMBER,
+      fieldTypeAttributes: {
+        format: '',
       },
     },
   },
@@ -198,9 +220,17 @@ const OrdersTable = enhancer(
         }
       };
 
+      renderTotal = (column, rowData) => {
+        return this.renderItems(column, rowData, orderItems => getTotalOrder(orderItems.items));
+      };
+
       renderCell = (column, rowData) => {
         if (column.name === 'edit') {
           return this.renderEdit(rowData);
+        }
+
+        if (column.name === 'orderItems') {
+          return this.renderTotal(column, rowData);
         }
 
         switch (column.meta.fieldType) {
@@ -231,7 +261,6 @@ const OrdersTable = enhancer(
       render() {
         const { orders } = this.props;
         const tableData = objectPath.get(orders, ['ordersList', 'items']) || [];
-
         return (
           <TableBuilder
             loading={orders.loading}

@@ -1,15 +1,12 @@
 import React from 'react';
 import { Heading, Table, Text } from '@8base/boost';
 import { DateTime } from 'luxon';
+import { getTotalOrder } from '../../helpers';
 
 const OrderInfo = ({ item, title }) => {
   const { address, comment, deliveryDt, status, orderItems } = item;
 
-  const total = orderItems.items.reduce((acc, current) => {
-    const {product:{price}, quantity } = current;
-    const cost = Math.round(+price * quantity * 100) / 100;
-    return Math.round((acc + cost) * 100) / 100;
-  }, 0);
+  const total = getTotalOrder(orderItems.items);
 
   const tableProducts = (
     <div style={{ display: 'flex', width: '100%' }}>

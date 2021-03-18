@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 import OrderInfo from '../orders/OrderInfo'
 
 const ORDER_DETAILS_QUERY = gql`
-  query OrderDetailContent($id: ID!) {
+  query OrderDetailsContent($id: ID!) {
     order(id: $id) {
       id
       address
