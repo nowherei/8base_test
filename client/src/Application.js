@@ -1,17 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import { AppProvider } from '@8base-react/app-provider';
 import { Auth, AUTH_STRATEGIES } from '@8base/auth';
 import { BoostProvider, AsyncContent } from '@8base/boost';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { ProtectedRoute } from 'shared/components';
 import { HIDE_TOAST_ERROR_MESSAGE, TOAST_SUCCESS_MESSAGE } from 'shared/constants';
 
-import { MainPlate, ContentPlate, Nav } from './components';
-import { Auth as AuthCallback } from './routes/auth';
-
-import { Root } from './Root';
+import { Root } from 'Root';
 
 
 const { REACT_APP_8BASE_API_ENDPOINT, REACT_APP_CLIENT_DOMAIN, REACT_APP_CLIENT_ID } = process.env;

@@ -47,7 +47,7 @@ const CLIENT_DETAILS_QUERY = gql`
 const ClientDetails = ({ match }) => {
   const { id } = match.params;
 
-  const { loading, error, data } = useQuery(CLIENT_DETAILS_QUERY, {
+  const { loading, data } = useQuery(CLIENT_DETAILS_QUERY, {
     variables: { id },
   });
   if (loading) return <Loader stretch />;

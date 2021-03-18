@@ -4,8 +4,8 @@ import objectPath from 'object-path';
 import { graphql } from 'react-apollo';
 import { flowRight as compose } from 'lodash';
 import { DateTime } from 'luxon';
-import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
-import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
+import { TableBuilder, Dropdown, Icon, Menu, Tag, Row, withModal } from '@8base/boost';
+import { FIELD_TYPE, DATE_FORMATS } from '@8base/utils';
 import { withRouter } from 'react-router-dom';
 
 const CLIENTS_LIST_QUERY = gql`

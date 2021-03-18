@@ -1,47 +1,18 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
-import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
+import { Form as FormLogic, Field } from '@8base/forms';
 import {
   AsyncContent,
   Dialog,
   Grid,
   Button,
-  Form,
-  Row,
-  Column,
-  Icon,
-  Text,
-  SelectField,
   InputField,
-  CheckboxField,
   DateInputField,
-  Label,
   ModalContext,
 } from '@8base/boost';
-import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
 import { Loader } from '@8base/boost';
 import { removeTypename } from '../../helpers';
-
-/* const CLIENT_QUERY = gql`
-  query ClientsEntity($id: ID!) {
-  client(id: $id) {
-    id
-    firstName
-    lastName
-    email
-    phone
-    birthday
-    orders {
-      items {
-        id
-        _description
-      }
-      count
-    }
-  }
-} 
-`; */
 
 const CLIENT_QUERY = gql`
   query ClientsEntity($id: ID!) {
@@ -63,9 +34,6 @@ const CLIENT_UPDATE_MUTATION = gql`
     }
   }
 `;
-
-const getRelationOptions = (items = []) =>
-  items.map(item => ({ value: item.id, label: item._description || 'Untitled Record' }));
 
 const ehnhancer = graphql(CLIENT_UPDATE_MUTATION, {
   name: 'clientUpdate',

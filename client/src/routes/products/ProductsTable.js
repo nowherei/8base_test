@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo';
 import { flowRight as compose } from 'lodash';
 import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
-import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
+import { FIELD_TYPE, FILE_FORMATS, DATE_FORMATS } from '@8base/utils';
 
 const PRODUCTS_LIST_QUERY = gql`
 query ProductsTableContent($filter: ProductFilter, $orderBy: [ProductOrderBy], $after: String, $before: String, $first: Int, $last: Int, $skip: Int) {

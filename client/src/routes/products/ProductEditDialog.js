@@ -1,54 +1,19 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
-import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
+import { Form as FormLogic, Field} from '@8base/forms';
 import {
   AsyncContent,
   Dialog,
   Grid,
   Button,
-  Form,
-  Row,
-  Column,
-  Icon,
-  Text,
-  SelectField,
   InputField,
-  CheckboxField,
-  DateInputField,
-  Label,
   ModalContext,
 } from '@8base/boost';
-import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
+import { FileInputField } from 'shared/components';
 
 import { Loader } from '@8base/boost';
-import { removeTypename } from '../../helpers';
-
-/* const PRODUCT_QUERY = gql`
-  query ProductsEntity($id: ID!) {
-    product(id: $id) {
-      id
-      picture {
-        id
-        fileId
-        filename
-        downloadUrl
-        shareUrl
-        meta
-      }
-      name
-      description
-      price
-      orderItems {
-        items {
-          id
-          _description
-        }
-        count
-      }
-    }
-  }
-`; */
+import { removeTypename } from 'helpers';
 
 const PRODUCT_QUERY = gql`
   query ProductsEntity($id: ID!) {
@@ -76,9 +41,6 @@ const PRODUCT_UPDATE_MUTATION = gql`
     }
   }
 `;
-
-const getRelationOptions = (items = []) =>
-  items.map(item => ({ value: item.id, label: item._description || 'Untitled Record' }));
 
 const ehnhancer = graphql(PRODUCT_UPDATE_MUTATION, {
   name: 'productUpdate',

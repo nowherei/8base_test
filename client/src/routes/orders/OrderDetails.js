@@ -44,13 +44,13 @@ const ORDER_DETAILS_QUERY = gql`
 const OrderDetails = ({ match }) => {
   const { id } = match.params;
 
-  const { loading, error, data } = useQuery(ORDER_DETAILS_QUERY, {
+  const { loading, data } = useQuery(ORDER_DETAILS_QUERY, {
     variables: { id },
   });
   if (loading) return <Loader stretch />;
 
   const {client} = data.order;
-  const {firstName, birthday, email, lastName, phone, orders} = client;
+  const {firstName, birthday, email, lastName, phone} = client;
 
   return (
     <Card padding="md" stretch>

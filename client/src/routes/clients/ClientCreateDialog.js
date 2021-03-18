@@ -1,24 +1,15 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { Query, graphql } from 'react-apollo';
-import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
+import { graphql } from 'react-apollo';
+import { Form as FormLogic, Field } from '@8base/forms';
 import {
   Dialog,
   Grid,
   Button,
-  Form,
-  Row,
-  Column,
-  Icon,
-  Text,
-  SelectField,
   InputField,
-  CheckboxField,
   DateInputField,
-  Label,
   ModalContext,
 } from '@8base/boost';
-import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
 
 const CLIENT_CREATE_MUTATION = gql`
   mutation ClientCreate($data: ClientCreateInput!) {
@@ -27,9 +18,6 @@ const CLIENT_CREATE_MUTATION = gql`
     }
   }
 `;
-
-const getRelationOptions = (items = []) =>
-  items.map(item => ({ value: item.id, label: item._description || 'Untitled Record' }));
 
 const enhancer = graphql(CLIENT_CREATE_MUTATION, {
   name: 'clientCreate',
