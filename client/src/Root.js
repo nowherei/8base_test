@@ -17,17 +17,17 @@ export const Root = () => (
       <MainPlate>
         <Nav.Plate color="BLUE">
           {/** __APP_ROUTE_LINKS__ */}
-          <Nav.Item icon="Group" to="/clients/" label="Clients" />
-          <Nav.Item icon="Contract" to="/orders/" label="Orders" />
-          <Nav.Item icon="Planet" to="/products/" label="Products" />
+          <Nav.Item icon="Group" to="/clients" label="Clients" />
+          <Nav.Item icon="Contract" to="/orders" label="Orders" />
+          <Nav.Item icon="Planet" to="/products" label="Products" />
         </Nav.Plate>
         <ContentPlate>
           <Switch>
             {/** __APP_ROUTES__ */}
-            <ProtectedRoute exact path="/clients/" component={Clients} />
+            <ProtectedRoute exact path="/clients" component={Clients} />
             <ProtectedRoute exact path="/clients/:id" component={ClientDetail} />
-            <ProtectedRoute exact path="/orders/" component={Orders} />
-            <ProtectedRoute exact path="/products/" component={Products} />
+            <ProtectedRoute exact path="/orders" component={Orders} />
+            <ProtectedRoute exact path="/products" component={Products} />
             <Redirect to="/clients/" />
           </Switch>
         </ContentPlate>

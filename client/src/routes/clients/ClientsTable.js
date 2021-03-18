@@ -94,7 +94,7 @@ const enhancer = compose(withModal, graphql(CLIENTS_LIST_QUERY, { name: 'clients
 const ClientsTable = enhancer(withRouter(
   class ClientsTable extends React.PureComponent {
     renderEdit = rowData => {
-      const {history} = this.props;
+      const {history, match} = this.props;
     return (
       <Dropdown defaultOpen={false}>
         <Dropdown.Head>
@@ -105,7 +105,7 @@ const ClientsTable = enhancer(withRouter(
             <Menu>
               <Menu.Item
                 onClick={() => {
-                  history.push(rowData.id);
+                  history.push(`${!/\/$/.test(match.url) ? match.url + '/' : ''}${rowData.id}`);
                 }}
               >
                 Open
