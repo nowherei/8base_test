@@ -4,10 +4,10 @@ import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from 'react-apollo';
 import { DateTime } from 'luxon';
-import ClientDetailsOrderList from './ClientDetailsOrderList';
+import OrderInfo from '../orders/OrderInfo'
 
-const CLIENT_QUERY = gql`
-  query ClientsEntity($id: ID!) {
+const CLIENT_DETAILS_QUERY = gql`
+  query ClientDetailContent($id: ID!) {
     client(id: $id) {
       id
       firstName
@@ -47,12 +47,17 @@ const CLIENT_QUERY = gql`
 const ClientDetails = ({ match }) => {
   const { id } = match.params;
 
-  const { loading, error, data } = useQuery(CLIENT_QUERY, {
+  const { loading, error, data } = useQuery(CLIENT_DETAILS_QUERY, {
     variables: { id },
   });
   if (loading) return <Loader stretch />;
 
   const {firstName, birthday, email, lastName, phone, orders} = data.client;
+
+  const ordersList = orders.items.map((item, key) => {
+    const {id} = item;
+    return <OrderInfo key={id} item={item} title={`Order #${key + 1}`} />
+  });
 
   return (
     <Card padding="md" stretch>
@@ -67,7 +72,8 @@ const ClientDetails = ({ match }) => {
           <Text>Bithday: { DateTime.fromISO(birthday).toLocaleString() }</Text>
           <Text>Email: { email }</Text>
           <Text>Phone: { phone }</Text>
-          <ClientDetailsOrderList orders={orders} />
+          <Heading type="h3" text="Order List" />
+          {ordersList.length ? ordersList : <Text>No orders</Text>}
         </Column>
       </Card.Body>
     </Card>

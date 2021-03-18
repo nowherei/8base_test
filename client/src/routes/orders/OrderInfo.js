@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading, Table, Text } from '@8base/boost';
 import { DateTime } from 'luxon';
 
-const ClientDetailsOrderItem = ({ item, number }) => {
+const OrderInfo = ({ item, title }) => {
   const { address, comment, deliveryDt, status, orderItems } = item;
 
   const total = orderItems.items.reduce((acc, current) => {
@@ -45,15 +45,15 @@ const ClientDetailsOrderItem = ({ item, number }) => {
   );
   return (
     <React.Fragment>
-      <Heading type="h4" text={`Order #${number}`} />
+      {title ? <Heading type="h4" text={title} /> : ''}
       <Text>DeliveryDt: {DateTime.fromISO(deliveryDt).toLocaleString(DateTime.DATETIME_SHORT)}</Text>
       <Text>Address: {address}</Text>
       <Text>Comment: {comment}</Text>
       <Text>Status: {status}</Text>
       {tableProducts}
-      <Text style={{margin: '0 0 25px'}} weight="bold">Total: {total}</Text>
+      {total ? <Text style={{margin: '0 0 25px'}} weight="bold">Total: {total}</Text> : ''}
     </React.Fragment>
   );
 };
 
-export default ClientDetailsOrderItem;
+export default OrderInfo;
