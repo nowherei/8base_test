@@ -96,7 +96,7 @@ const ProductEditDialog = ehnhancer(
                       <AsyncContent loading={loading} stretch>
                         <Grid.Layout gap="md" stretch>
                           <Grid.Box>
-                            <Field name="picture" label="Picture" component={FileInputField} />
+                            <Field name="picture" label="Picture" component={FileInputField} maxFiles={1} public={true} />
                           </Grid.Box>
                           <Grid.Box>
                             <Field name="name" label="Name" component={InputField} />

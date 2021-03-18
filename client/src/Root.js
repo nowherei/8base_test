@@ -30,7 +30,7 @@ export const Root = () => (
             <ProtectedRoute exact path="/orders" component={Orders} />
             <ProtectedRoute exact path="/orders/:id" component={OrderDetails} />
             <ProtectedRoute exact path="/products" component={Products} />
-            <Redirect to="/clients/" />
+            <Redirect to="/clients" />
           </Switch>
         </ContentPlate>
       </MainPlate>

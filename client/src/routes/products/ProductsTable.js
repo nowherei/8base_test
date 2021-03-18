@@ -14,11 +14,8 @@ query ProductsTableContent($filter: ProductFilter, $orderBy: [ProductOrderBy], $
       id
       picture {
         id
-        fileId
-        filename
         downloadUrl
         shareUrl
-        meta
       }
       name
       description

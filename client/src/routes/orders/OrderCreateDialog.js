@@ -1,24 +1,16 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
-import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
+import { Form as FormLogic, Field } from '@8base/forms';
 import {
   Dialog,
   Grid,
   Button,
-  Form,
-  Row,
-  Column,
-  Icon,
-  Text,
   SelectField,
   InputField,
-  CheckboxField,
   DateInputField,
-  Label,
   ModalContext,
 } from '@8base/boost';
-import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
 
 const ORDER_CREATE_MUTATION = gql`
   mutation OrderCreate($data: OrderCreateInput!) {

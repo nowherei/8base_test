@@ -6,23 +6,28 @@ import { Grid, Breadcrumbs as BoostBreadcrumbs, Link } from '@8base/boost';
 
 const BREADCRUMBS_ROUTES = [
   {
-    path: '/brokers',
-    component: () => 'Brokers',
+    path: '/clients',
+    component: () => 'Clients',
     matchOptions: { exact: true },
   },
   {
-    path: '/customers',
-    component: () => 'Customers',
+    path: '/clients/:id',
+    component: () => 'Details',
     matchOptions: { exact: true },
   },
   {
-    path: '/properties',
-    component: () => 'Properties',
+    path: '/orders',
+    component: () => 'Orders',
     matchOptions: { exact: true },
   },
   {
-    path: '/listings',
-    component: () => 'Listings',
+    path: '/orders/:id',
+    component: () => 'Details',
+    matchOptions: { exact: true },
+  },
+  {
+    path: '/products',
+    component: () => 'Products',
     matchOptions: { exact: true },
   },
 ];
@@ -31,7 +36,7 @@ const HeaderTag = styled(Grid.Box)({
   paddingLeft: '2rem',
 });
 
-const BreadcrumbsItem = props => <Link tagName={RouterLink} color="DARK_GRAY1" size="lg" {...props} />;
+const BreadcrumbsItem = props => <Link tagName={RouterLink} color="DARK_GRAY1" size="lg" underline="false" {...props} />;
 
 let Breadcrumbs = ({ location }) => (
   <HeaderTag area="breadcrumbs" justifyContent="center">

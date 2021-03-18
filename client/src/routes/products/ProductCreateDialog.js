@@ -34,6 +34,7 @@ const ProductCreateDialog = enhancer(
     static contextType = ModalContext;
 
     onSubmit = async data => {
+      
       data = {
         ...data, 
         picture: {
